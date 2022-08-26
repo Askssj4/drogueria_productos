@@ -1,19 +1,26 @@
+import 'dart:convert';
+
 import 'package:drogueria_productos_pie/Widgets/image_slider.dart';
 import 'package:drogueria_productos_pie/Widgets/tabla_general.dart';
 import 'package:drogueria_productos_pie/constantes.dart';
+import 'package:drogueria_productos_pie/model/generales_productos_model.dart' as apiget;
 import 'package:drogueria_productos_pie/responsive/tablet_scaffold.dart';
+import 'package:drogueria_productos_pie/services/servicios.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_scaffold_nullsafe/responsive_scaffold.dart';
 
+import '../../model/generales_productos_model.dart';
 import '../../responsive/desktop_scaffold.dart';
 import '../../responsive/mobile_scaffold.dart';
 import '../../responsive/responsive_layout.dart';
 import 'package:flutter/services.dart';
 import 'package:multiselect/multiselect.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' as rutaget;
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
 
 import 'agregar_productos.dart';
 
@@ -45,6 +52,14 @@ class _NegociacionPricipalState extends State<NegociacionPricipal> {
     ];
   }
 
+  /* final ObtenerGeneralesProductosServicio _obtenerGeneralesProductosServicio = ObtenerGeneralesProductosServicio();
+
+  @override
+  void initState(){
+    super.initState();
+    _obtenerGeneralesProductosServicio.getGeneralesProductosList();
+  } */
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +81,7 @@ class _NegociacionPricipalState extends State<NegociacionPricipal> {
                           children: [
                             Row(children: [
                               ElevatedButton(
-                                onPressed: () => {Get.to(AgregarProductos())},
+                                onPressed: () => {rutaget.Get.to(AgregarProductos())},
                                 style: ElevatedButton.styleFrom(
                                     primary: Colors.green[300]),
                                 child: const Text('Agregar Producto'),

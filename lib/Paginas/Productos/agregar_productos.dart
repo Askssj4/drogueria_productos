@@ -3,17 +3,22 @@ import 'package:drogueria_productos_pie/Widgets/image_slider.dart';
 import 'package:drogueria_productos_pie/Widgets/select_multiple.dart';
 import 'package:drogueria_productos_pie/Paginas/Productos/Widgets/select_multiple_label_productos.dart';
 import 'package:drogueria_productos_pie/constantes.dart';
+import 'package:drogueria_productos_pie/model/generales_productos_model.dart';
 import 'package:drogueria_productos_pie/responsive/tablet_scaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_scaffold_nullsafe/responsive_scaffold.dart';
 
+import '../../repositorio/get_generales_productos_notificador.dart';
 import '../../responsive/desktop_scaffold.dart';
 import '../../responsive/mobile_scaffold.dart';
 import '../../responsive/responsive_layout.dart';
 import 'package:flutter/services.dart';
 import 'package:multiselect/multiselect.dart';
+
+import '../../services/servicios.dart';
 
 class AgregarProductos extends StatefulWidget {
   const AgregarProductos({Key? key}) : super(key: key);
@@ -27,6 +32,7 @@ class _AgregarProductos extends State<AgregarProductos> {
   String clasificacionSeleccionada = "One";
   String viaAdministracionSeleccionada = "One";
   bool EsDescontinuado = false;
+  List<GeneralesProductos> generalesProductosCargados = [];
 
   List<String> opcionesPresentacion = ["1", "2", "3"];
   List<String> opcionesClasificacion = ["4", "5", "6"];
@@ -43,8 +49,20 @@ class _AgregarProductos extends State<AgregarProductos> {
 
   final _formKey = GlobalKey<FormState>();
 
+  final ObtenerGeneralesProductosServicio _obtenerGeneralesProductosServicio = ObtenerGeneralesProductosServicio();
+
+  @override
+  void initState(){
+    super.initState();
+    _obtenerGeneralesProductosServicio.getGeneralesProductosList();
+  }
+
+  late final GeneralesProductos _generalesProductos;
+
   @override
   Widget build(BuildContext context) {
+    /* final data = Provider.of<GeneralesProductosNotificador>(context, listen: false); */
+
     return Scaffold(
       appBar: appBarGeneral,
       body: SingleChildScrollView(
@@ -312,7 +330,7 @@ class _AgregarProductos extends State<AgregarProductos> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ElevatedButton(
-                                    onPressed: () => {print("click")},
+                                    onPressed: () => {print(ObtenerGeneralesProductosServicio())},
                                     style: ElevatedButton.styleFrom(
                                         primary: Colors.blue[800]),
                                     child: const Text('Fotografía'),
