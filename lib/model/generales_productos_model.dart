@@ -1,4 +1,196 @@
+// To parse this JSON data, do
+//
+//     final generalesProductos = generalesProductosFromJson(jsonString);
+
+import 'package:meta/meta.dart';
 import 'dart:convert';
+
+GeneralesProductos generalesProductosFromJson(String str) => GeneralesProductos.fromJson(json.decode(str));
+
+String generalesProductosToJson(GeneralesProductos data) => json.encode(data.toJson());
+
+class GeneralesProductos {
+    GeneralesProductos({
+        required this.envasePrimario,
+        required this.presentacion,
+        required this.viaAdministracion,
+        required this.estadoComercial,
+        required this.clasificacionMedica,
+        required this.unidadMedida,
+    });
+
+    List<EnvasePrimario> envasePrimario;
+    List<Presentacion> presentacion;
+    List<ViaAdministracion> viaAdministracion;
+    List<EstadoComercial> estadoComercial;
+    List<ClasificacionMedica> clasificacionMedica;
+    List<UnidadMedida> unidadMedida;
+
+    factory GeneralesProductos.fromJson(Map<String, dynamic> json) => GeneralesProductos(
+        envasePrimario: List<EnvasePrimario>.from(json["envase_primario"].map((x) => EnvasePrimario.fromJson(x))),
+        presentacion: List<Presentacion>.from(json["presentacion"].map((x) => Presentacion.fromJson(x))),
+        viaAdministracion: List<ViaAdministracion>.from(json["via_administracion"].map((x) => ViaAdministracion.fromJson(x))),
+        estadoComercial: List<EstadoComercial>.from(json["estado_comercial"].map((x) => EstadoComercial.fromJson(x))),
+        clasificacionMedica: List<ClasificacionMedica>.from(json["clasificacion_medica"].map((x) => ClasificacionMedica.fromJson(x))),
+        unidadMedida: List<UnidadMedida>.from(json["unidad_medida"].map((x) => UnidadMedida.fromJson(x))),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "envase_primario": List<dynamic>.from(envasePrimario.map((x) => x.toJson())),
+        "presentacion": List<dynamic>.from(presentacion.map((x) => x.toJson())),
+        "via_administracion": List<dynamic>.from(viaAdministracion.map((x) => x.toJson())),
+        "estado_comercial": List<dynamic>.from(estadoComercial.map((x) => x.toJson())),
+        "clasificacion_medica": List<dynamic>.from(clasificacionMedica.map((x) => x.toJson())),
+        "unidad_medida": List<dynamic>.from(unidadMedida.map((x) => x.toJson())),
+    };
+}
+
+class ClasificacionMedica {
+    ClasificacionMedica({
+        required this.idClasificacionMedica,
+        required this.activo,
+        required this.clasificacionMedica,
+    });
+
+    int idClasificacionMedica;
+    bool activo;
+    String clasificacionMedica;
+
+    factory ClasificacionMedica.fromJson(Map<String, dynamic> json) => ClasificacionMedica(
+        idClasificacionMedica: json["id_clasificacion_medica"],
+        activo: json["activo"],
+        clasificacionMedica: json["clasificacion_medica"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id_clasificacion_medica": idClasificacionMedica,
+        "activo": activo,
+        "clasificacion_medica": clasificacionMedica,
+    };
+}
+
+class EnvasePrimario {
+    EnvasePrimario({
+        required this.idEnvase,
+        required this.activo,
+        required this.envase,
+    });
+
+    int idEnvase;
+    bool activo;
+    String envase;
+
+    factory EnvasePrimario.fromJson(Map<String, dynamic> json) => EnvasePrimario(
+        idEnvase: json["id_envase"],
+        activo: json["activo"],
+        envase: json["envase"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id_envase": idEnvase,
+        "activo": activo,
+        "envase": envase,
+    };
+}
+
+class EstadoComercial {
+    EstadoComercial({
+        required this.idEstadoComercial,
+        required this.activo,
+        required this.estadoComercial,
+    });
+
+    int idEstadoComercial;
+    bool activo;
+    String estadoComercial;
+
+    factory EstadoComercial.fromJson(Map<String, dynamic> json) => EstadoComercial(
+        idEstadoComercial: json["id_estado_comercial"],
+        activo: json["activo"],
+        estadoComercial: json["estado_comercial"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id_estado_comercial": idEstadoComercial,
+        "activo": activo,
+        "estado_comercial": estadoComercial,
+    };
+}
+
+class Presentacion {
+    Presentacion({
+        required this.idPresentacion,
+        required this.activo,
+        required this.presentacion,
+    });
+
+    int idPresentacion;
+    bool activo;
+    String presentacion;
+
+    factory Presentacion.fromJson(Map<String, dynamic> json) => Presentacion(
+        idPresentacion: json["id_presentacion"],
+        activo: json["activo"],
+        presentacion: json["presentacion"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id_presentacion": idPresentacion,
+        "activo": activo,
+        "presentacion": presentacion,
+    };
+}
+
+class UnidadMedida {
+    UnidadMedida({
+        required this.idUnidadMedida,
+        required this.activo,
+        required this.unidadMedida,
+    });
+
+    int idUnidadMedida;
+    bool activo;
+    String unidadMedida;
+
+    factory UnidadMedida.fromJson(Map<String, dynamic> json) => UnidadMedida(
+        idUnidadMedida: json["id_unidad_medida"],
+        activo: json["activo"],
+        unidadMedida: json["unidad_medida"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id_unidad_medida": idUnidadMedida,
+        "activo": activo,
+        "unidad_medida": unidadMedida,
+    };
+}
+
+class ViaAdministracion {
+    ViaAdministracion({
+        required this.idViaAdministracion,
+        required this.activo,
+        required this.viaAdministracion,
+    });
+
+    int idViaAdministracion;
+    bool activo;
+    String viaAdministracion;
+
+    factory ViaAdministracion.fromJson(Map<String, dynamic> json) => ViaAdministracion(
+        idViaAdministracion: json["id_via_administracion"],
+        activo: json["activo"],
+        viaAdministracion: json["via_administracion"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id_via_administracion": idViaAdministracion,
+        "activo": activo,
+        "via_administracion": viaAdministracion,
+    };
+}
+
+
+/* import 'dart:convert';
 
 GeneralesProductos generalesProductosFromJson(String str) => GeneralesProductos.fromJson(json.decode(str));
 
@@ -32,7 +224,7 @@ class GeneralesProductos {
 
     Map<String, dynamic> toJson() => {
         "envase_primario": List<dynamic>.from(envasePrimario.map((x) => x.toJson())),
-        "presentacion": List<dynamic>.from(presentacion.map((x) => x.toJson())),
+        "presentacion": List<String>.from(presentacion.map((x) => x.toJson())),
         "via_administracion": List<dynamic>.from(viaAdministracion.map((x) => x.toJson())),
         "estado_comercial": List<dynamic>.from(estadoComercial.map((x) => x)),
         "clasificacion_medica": List<dynamic>.from(clasificacionMedica.map((x) => x)),
@@ -135,7 +327,7 @@ class ViaAdministracion {
         "via_administracion": viaAdministracion,
     };
 }
-
+ */
 
 // To parse this JSON data, do
 //

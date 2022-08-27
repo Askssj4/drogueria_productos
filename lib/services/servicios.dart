@@ -2,13 +2,15 @@ import 'dart:convert';
 import 'package:drogueria_productos_pie/model/generales_productos_model.dart';
 import 'package:http/http.dart' as http;
 
+import '../env.dart';
+
 class ObtenerGeneralesProductosServicio {
 
       var client = http.Client();
 
      /* final String urlENDPOINT = "https://pokeapi.co/api/v2/pokemon/ditto"; */
 
-     final String urlENDPOINT = "http://localhost:8008/api/producto/obtener_generales_detalle_producto";
+     final String urlENDPOINT = "${URL1}producto/obtener_generales_detalle_producto";
 
      late GeneralesProductos generalesproductosModel;
 
